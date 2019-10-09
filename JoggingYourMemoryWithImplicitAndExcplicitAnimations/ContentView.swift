@@ -10,17 +10,28 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var animateAll = false
+    @State private var scale = false
+    @State private var rotate = false
+    @State private var fade = false
+    
     
     var body: some View {
         Image("flower")
-            .scaleEffect(animateAll ? 0.2 : 2)
-            .rotationEffect(.degrees(animateAll ? 0 : 360), anchor: .center)
-            .opacity(animateAll ? 0.2 : 1)
+            .scaleEffect(scale ? 0.2 : 1)
+            .rotationEffect(.degrees(rotate ? 0 : 360), anchor: .center)
+            .opacity(fade ? 0.2 : 1)
             //Implicit Animation
             .animation(Animation.easeInOut(duration: 4).repeatCount(1, autoreverses: true))
             .onTapGesture {
-                self.animateAll.toggle()
+                // Explicit Animation
+                withAnimation(Animation.easeInOut(duration: 4).repeatCount(1, autoreverses: true)) {
+                    self.scale.toggle()
+                    self.rotate.toggle()
+                    self.fade.toggle()
+                }
+//                self.scale.toggle()
+//                self.rotate.toggle()
+//                self.fade.toggle()
         }
     }
 }
