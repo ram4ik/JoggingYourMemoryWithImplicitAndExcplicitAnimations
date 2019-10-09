@@ -14,14 +14,13 @@ struct ContentView: View {
     
     var body: some View {
         Image("flower")
-            .scaleEffect(1)
-            .rotationEffect(.degrees(0), anchor: .center)
-            .opacity(1)
+            .scaleEffect(animateAll ? 0.2 : 2)
+            .rotationEffect(.degrees(animateAll ? 0 : 360), anchor: .center)
+            .opacity(animateAll ? 0.2 : 1)
             //Implicit Animation
             .animation(Animation.easeInOut(duration: 4).repeatCount(1, autoreverses: true))
             .onTapGesture {
                 self.animateAll.toggle()
-                print("toggled")
         }
     }
 }
